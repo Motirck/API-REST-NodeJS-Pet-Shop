@@ -41,6 +41,47 @@ class Appointments {
             })
         }
     }
+
+    getAll(res) {
+        const sql = 'SELECT * FROM Appointments';
+        connection.query(sql, (error, results) => {
+            if (error) {
+                res.status(400).json(error);
+            }
+            else {
+                res.status(200).json(results);
+            }
+        })
+    }
+
+    getOne(id, res) {
+        const sql = `SELECT * FROM Appointments WHERE id=${id}`
+
+        connection.query(sql, (error, results) => {
+            if (error) {
+                res.status(400).json(error);
+            }
+            else {
+                res.status(200).json(results[0]);
+            }
+        })
+    }
+
+    update(id, data, res) {
+        if (data.date) {
+            data.date = moment(data.date, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss');
+        }
+        const sql = 'UPDATE Appointments SET ? WHERE id=?'
+
+        connection.query(sql, [data, id], (error, results) => {
+            if (error) {
+                res.status(400).json(error);
+            }
+            else {
+                res.status(200).json(results);
+            }
+        })
+    }
 }
 
 module.exports = new Appointments;
