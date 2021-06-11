@@ -6,7 +6,7 @@ Criação de API REST utilizando NodeJS com Express e MySQL
 * npm install express
 * npm install --save-dev nodemon (nodemon fará com que o servidor "escute" qualquer alteração e recompile automaticamente o projeto e o "--save-dev" fará com que a lib exista apenas em ambiente de Dev)
 * npm install consign (agrupa todas as rotas criadas dentro do app (index.js))
-
+* npm install mysql (instala o mysql como banco de dados)
 
 
 
@@ -20,3 +20,10 @@ Criação de API REST utilizando NodeJS com Express e MySQL
     "start": "nodemon index.js",
 },
 ```
+
+### Banco MySQL
+- Faça a instalação do MySQL Community (Gratuito)
+- Escolha a opção de instalção **custom** e escolha a ultima versão do **MySQL Server** e **MySQL Workbench**
+- Password: Admin123$&
+- Crie uma nova conexão do MySQL (agenda-petshop)
+- No Workbench crie um novo schema para criação do novo banco de dados (agenda-petshop)

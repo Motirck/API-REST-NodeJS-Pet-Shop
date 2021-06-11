@@ -19,7 +19,8 @@
   "homepage": "https://github.com/Motirck/API-REST-NodeJS-Pet-Shop.git",
   "dependencies": {
     "consign": "^0.1.6",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
