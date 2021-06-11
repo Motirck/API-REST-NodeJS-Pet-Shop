@@ -1,0 +1,27 @@
+{
+  "name": "projeto-nodejs-rest-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "Url": "git+https://github.com/Motirck/API-REST-NodeJS-Pet-Shop.git"
+  },
+  "author": "Ricardo Alves Paula",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Motirck/API-REST-NodeJS-Pet-Shop.git"
+  },
+  "homepage": "https://github.com/Motirck/API-REST-NodeJS-Pet-Shop.git",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
