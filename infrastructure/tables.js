@@ -10,6 +10,8 @@ class Tables {
             'client VARCHAR(50) NOT NULL, ' +
             'pet VARCHAR(20), ' +
             'service VARCHAR(20) NOT NULL, ' +
+            'date DATETIME NOT NULL, ' +
+            'createdDate DATETIME NOT NULL, ' +
             'status VARCHAR(20) NOT NULL, ' +
             'notes text, ' +
             'PRIMARY KEY(id))'

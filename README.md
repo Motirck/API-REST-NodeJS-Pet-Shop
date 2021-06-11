@@ -7,7 +7,7 @@ Criação de API REST utilizando NodeJS com Express e MySQL
 * npm install --save-dev nodemon (nodemon fará com que o servidor "escute" qualquer alteração e recompile automaticamente o projeto e o "--save-dev" fará com que a lib exista apenas em ambiente de Dev)
 * npm install consign (agrupa todas as rotas criadas dentro do app (index.js))
 * npm install mysql (instala o mysql como banco de dados)
-
+* npm install moment (instala a biblioteca moment para trabalhar com datas)
 
 
 
@@ -20,6 +20,7 @@ Criação de API REST utilizando NodeJS com Express e MySQL
     "start": "nodemon index.js",
 },
 ```
+- Para conferir o significado de todos os status HTTP acesse: https://httpstatuses.com/
 
 ### Banco MySQL
 - Faça a instalação do MySQL Community (Gratuito)
