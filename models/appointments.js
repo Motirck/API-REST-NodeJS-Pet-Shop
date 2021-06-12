@@ -31,12 +31,12 @@ class Appointments {
 
             const sql = 'INSERT INTO Appointments SET ?'
 
-            connection.query(sql, appointmentWithDate, (error, results) => {
+            connection.query(sql, appointmentWithDate, (error) => {
                 if (error) {
                     res.status(400).json(error);
                 }
                 else {
-                    res.status(201).json(results);
+                    res.status(201).json(appointment);
                 }
             })
         }
@@ -73,12 +73,25 @@ class Appointments {
         }
         const sql = 'UPDATE Appointments SET ? WHERE id=?'
 
-        connection.query(sql, [data, id], (error, results) => {
+        connection.query(sql, [data, id], (error) => {
             if (error) {
                 res.status(400).json(error);
             }
             else {
-                res.status(200).json(results);
+                res.status(200).json({...data, id});
+            }
+        })
+    }
+    
+    delete(id, res){
+        const sql = 'DELETE FROM Appointments WHERE id=?'
+
+        connection.query(sql, id, (error) => {
+            if (error) {
+                res.status(400).json(error);
+            }
+            else {
+                res.status(200).json({idDeleted: id});
             }
         })
     }

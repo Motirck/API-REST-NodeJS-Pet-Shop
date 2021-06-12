@@ -28,3 +28,6 @@ Criação de API REST utilizando NodeJS com Express e MySQL
 - Password: Admin123$&
 - Crie uma nova conexão do MySQL (agenda-petshop)
 - No Workbench crie um novo schema para criação do novo banco de dados (agenda-petshop)
+
+### Como testar essa API?
+- Dentro da pasta chamada **insomnia** existe um json que pode ser importado pelo Insomnia e que já contém todas as rotas e configurações necessárias para os testes dos endpoints
