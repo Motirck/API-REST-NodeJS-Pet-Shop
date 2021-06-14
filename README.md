@@ -2,12 +2,12 @@
 Criação de API REST utilizando NodeJS com Express e MySQL
 
 ### Comandos necessários
-* npm init (criar o arquivo **package.json**)
-* npm install express
-* npm install --save-dev nodemon (nodemon fará com que o servidor "escute" qualquer alteração e recompile automaticamente o projeto e o "--save-dev" fará com que a lib exista apenas em ambiente de Dev)
-* npm install consign (agrupa todas as rotas criadas dentro do app (index.js))
-* npm install mysql (instala o mysql como banco de dados)
-* npm install moment (instala a biblioteca moment para trabalhar com datas)
+> npm init (criar o arquivo **package.json**)
+> npm install express
+> npm install --save-dev nodemon (nodemon fará com que o servidor "escute" qualquer alteração e recompile automaticamente o projeto e o "--save-dev" fará com que a lib exista apenas em ambiente de Dev)
+> npm install consign (agrupa todas as rotas criadas dentro do app (index.js))
+> npm install mysql (instala o mysql como banco de dados)
+> npm install moment (instala a biblioteca moment para trabalhar com datas)
 
 
 
