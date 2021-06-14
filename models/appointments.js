@@ -29,9 +29,9 @@ class Appointments {
         else {
             const appointmentWithDate = { ...appointment, createdDate, date };
 
-            const sql = 'INSERT INTO Appointments SET ?'
+            const query = 'INSERT INTO Appointments SET ?'
 
-            connection.query(sql, appointmentWithDate, (error) => {
+            connection.query(query, appointmentWithDate, (error) => {
                 if (error) {
                     res.status(400).json(error);
                 }
@@ -43,8 +43,8 @@ class Appointments {
     }
 
     getAll(res) {
-        const sql = 'SELECT * FROM Appointments';
-        connection.query(sql, (error, results) => {
+        const query = 'SELECT * FROM Appointments';
+        connection.query(query, (error, results) => {
             if (error) {
                 res.status(400).json(error);
             }
@@ -55,9 +55,9 @@ class Appointments {
     }
 
     getOne(id, res) {
-        const sql = `SELECT * FROM Appointments WHERE id=${id}`
+        const query = `SELECT * FROM Appointments WHERE id=${id}`
 
-        connection.query(sql, (error, results) => {
+        connection.query(query, (error, results) => {
             if (error) {
                 res.status(400).json(error);
             }
@@ -71,9 +71,9 @@ class Appointments {
         if (data.date) {
             data.date = moment(data.date, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss');
         }
-        const sql = 'UPDATE Appointments SET ? WHERE id=?'
+        const query = 'UPDATE Appointments SET ? WHERE id=?'
 
-        connection.query(sql, [data, id], (error) => {
+        connection.query(query, [data, id], (error) => {
             if (error) {
                 res.status(400).json(error);
             }
@@ -84,9 +84,9 @@ class Appointments {
     }
     
     delete(id, res){
-        const sql = 'DELETE FROM Appointments WHERE id=?'
+        const query = 'DELETE FROM Appointments WHERE id=?'
 
-        connection.query(sql, id, (error) => {
+        connection.query(query, id, (error) => {
             if (error) {
                 res.status(400).json(error);
             }

@@ -26,7 +26,6 @@ module.exports = app => {
 
     app.delete('/appointments/:id', (req, res) => {
         const id = parseInt(req.params.id);
-        const data = req.body;
 
         appointment.delete(id, res);
     })
