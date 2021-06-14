@@ -22,6 +22,22 @@ Criação de API REST utilizando NodeJS com Express e MySQL
 ```
 - Para conferir o significado de todos os status HTTP acesse: https://httpstatuses.com/
 
+### Como debugar o Nodejs através do VSCode?
+1) Instale o Nodemon conforme as orientações acima
+2) Adicione a configuração de launch.json clicando no ícone de Debug do VSCode e logo após no ícone de engrenagem
+3) Clique no botão **Add Configuration** e escolha **{} Node.js: Attach**
+4) Altere o **package.json** e adcione o **--inspect** ao comando de start dos cripts. Exemplo:
+
+```json
+"scripts": {
+    "start:dev": "nodemon --inspect index.js",
+    "start": "node index.js"
+  },
+```
+
+5) Para executar o node via terminal execute o comando: **npm run start:dev**
+6) Pronto! Basta adicionar os break points no arquivo desejado e disparar uma requisição.
+
 ### Banco MySQL
 - Faça a instalação do MySQL Community (Gratuito)
 - Escolha a opção de instalção **custom** e escolha a ultima versão do **MySQL Server** e **MySQL Workbench**
