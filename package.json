@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Motirck/API-REST-NodeJS-Pet-Shop.git",
   "dependencies": {
+    "axios": "^0.21.1",
     "consign": "^0.1.6",
     "express": "^4.17.1",
     "moment": "^2.29.1",

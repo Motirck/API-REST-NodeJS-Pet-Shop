@@ -8,7 +8,7 @@ class Tables {
     createAppointments() {
         const query = 'CREATE TABLE IF NOT EXISTS Appointments ( ' +
             'id int NOT NULL AUTO_INCREMENT, ' +
-            'client VARCHAR(50) NOT NULL, ' +
+            'client VARCHAR(11) NOT NULL, ' +
             'pet VARCHAR(20), ' +
             'service VARCHAR(20) NOT NULL, ' +
             'date DATETIME NOT NULL, ' +

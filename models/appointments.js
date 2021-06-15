@@ -1,4 +1,5 @@
 const moment = require('moment');
+const axios = require('axios');
 const connection = require('../infrastructure/connection.js');
 
 class Appointments {
@@ -57,12 +58,19 @@ class Appointments {
     getOne(id, res) {
         const query = `SELECT * FROM Appointments WHERE id=${id}`
 
-        connection.query(query, (error, results) => {
+        connection.query(query, async (error, results) => {
+            const appointment = results[0];
+            const cpf = appointment.client;
+
             if (error) {
                 res.status(400).json(error);
             }
             else {
-                res.status(200).json(results[0]);
+                const { data } = await axios.get(`http://localhost:8082/${cpf}`);
+
+                appointment.client = data;
+
+                res.status(200).json(appointment);
             }
         })
     }
@@ -78,12 +86,12 @@ class Appointments {
                 res.status(400).json(error);
             }
             else {
-                res.status(200).json({...data, id});
+                res.status(200).json({ ...data, id });
             }
         })
     }
-    
-    delete(id, res){
+
+    delete(id, res) {
         const query = 'DELETE FROM Appointments WHERE id=?'
 
         connection.query(query, id, (error) => {
@@ -91,7 +99,7 @@ class Appointments {
                 res.status(400).json(error);
             }
             else {
-                res.status(200).json({idDeleted: id});
+                res.status(200).json({ idDeleted: id });
             }
         })
     }
