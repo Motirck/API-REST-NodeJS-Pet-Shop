@@ -1,68 +1,80 @@
 const moment = require('moment');
-const connection = require('../infrastructure/connection.js');
+const axios = require('axios');
+const connection = require('../infrastructure/database/connection');
+const repository = require('../repositories/appointment');
 
 class Appointments {
-    add(appointment, res) {
-        const createdDate = moment().format('YYYY-MM-DD HH:mm:ss');
-        const date = moment(appointment.date, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss');
+    constructor() {
+        this.validate = (params) => {
+            this.validations.filter(field => {
+                const { nome } = field;
+                const param = params[nome];
 
-        const isValidDate = moment(date).isSameOrAfter(createdDate);
-        const isValidClient = appointment.client.length >= 5;
-        const validations = [
+                return !field.valid(param);
+            })
+        }
+        this.validations = [
             {
                 name: 'data',
-                valid: isValidDate,
+                valid: this.isValidDate,
                 message: 'Data deve ser maior ou igual a data atual'
             },
             {
                 name: 'cliente',
-                valid: isValidClient,
+                valid: this.isValidClient,
                 message: 'Cliente deve ter pelo menos cinco caracteres'
             }
         ]
 
-        const errors = validations.filter(field => !field.valid);
+        this.isValidDate = ({ date, createdDate }) => moment(date).isSameOrAfter(createdDate);
+        this.isValidClient = (size) => size >= 5;
+    }
+
+    add(appointment) {
+        const createdDate = moment().format('YYYY-MM-DD HH:mm:ss');
+        const date = moment(appointment.date, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss');
+
+        const params = {
+            data: { date, createdDate },
+            client: { size: appointment.client.length }
+        }
+
+        const errors = this.validate(params);
 
         if (errors.length > 0) {
-            res.status(400).json(errors);
+            return new Promise((reject) => { reject(errors); });
         }
         else {
             const appointmentWithDate = { ...appointment, createdDate, date };
 
-            const sql = 'INSERT INTO Appointments SET ?'
-
-            connection.query(sql, appointmentWithDate, (error) => {
-                if (error) {
-                    res.status(400).json(error);
-                }
-                else {
-                    res.status(201).json(appointment);
-                }
-            })
+            return repository.add(appointmentWithDate).then
+                (results => {
+                    const id = results.insertId;
+                    return { ...appointment, id };
+                })
         }
     }
 
-    getAll(res) {
-        const sql = 'SELECT * FROM Appointments';
-        connection.query(sql, (error, results) => {
-            if (error) {
-                res.status(400).json(error);
-            }
-            else {
-                res.status(200).json(results);
-            }
-        })
+    getAll() {
+        return repository.getAll();
     }
 
     getOne(id, res) {
-        const sql = `SELECT * FROM Appointments WHERE id=${id}`
+        const query = `SELECT * FROM Appointments WHERE id=${id}`
 
-        connection.query(sql, (error, results) => {
+        connection.query(query, async (error, results) => {
+            const appointment = results[0];
+            const cpf = appointment.client;
+
             if (error) {
                 res.status(400).json(error);
             }
             else {
-                res.status(200).json(results[0]);
+                const { data } = await axios.get(`http://localhost:8082/${cpf}`);
+
+                appointment.client = data;
+
+                res.status(200).json(appointment);
             }
         })
     }
@@ -71,27 +83,27 @@ class Appointments {
         if (data.date) {
             data.date = moment(data.date, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss');
         }
-        const sql = 'UPDATE Appointments SET ? WHERE id=?'
+        const query = 'UPDATE Appointments SET ? WHERE id=?'
 
-        connection.query(sql, [data, id], (error) => {
+        connection.query(query, [data, id], (error) => {
             if (error) {
                 res.status(400).json(error);
             }
             else {
-                res.status(200).json({...data, id});
+                res.status(200).json({ ...data, id });
             }
         })
     }
-    
-    delete(id, res){
-        const sql = 'DELETE FROM Appointments WHERE id=?'
 
-        connection.query(sql, id, (error) => {
+    delete(id, res) {
+        const query = 'DELETE FROM Appointments WHERE id=?'
+
+        connection.query(query, id, (error) => {
             if (error) {
                 res.status(400).json(error);
             }
             else {
-                res.status(200).json({idDeleted: id});
+                res.status(200).json({ idDeleted: id });
             }
         })
     }
