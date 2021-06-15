@@ -14,7 +14,9 @@ module.exports = app => {
     app.post('/appointments', (req, res) => {
         const appointmentBody = req.body;
 
-        appointment.add(appointmentBody, res);
+        appointment.add(appointmentBody)
+            .then(appointmentCreated => res.status(201).json(appointmentCreated))
+            .catch(error => res.status(400).json(error));
     });
 
     app.patch('/appointments/:id', (req, res) => {

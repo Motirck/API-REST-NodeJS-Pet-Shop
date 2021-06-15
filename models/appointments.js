@@ -1,9 +1,10 @@
 const moment = require('moment');
 const axios = require('axios');
-const connection = require('../infrastructure/connection.js');
+const connection = require('../infrastructure/database/connection');
+const repository = require('../repositories/appointment');
 
 class Appointments {
-    add(appointment, res) {
+    add(appointment) {
         const createdDate = moment().format('YYYY-MM-DD HH:mm:ss');
         const date = moment(appointment.date, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss');
 
@@ -30,16 +31,11 @@ class Appointments {
         else {
             const appointmentWithDate = { ...appointment, createdDate, date };
 
-            const query = 'INSERT INTO Appointments SET ?'
-
-            connection.query(query, appointmentWithDate, (error) => {
-                if (error) {
-                    res.status(400).json(error);
-                }
-                else {
-                    res.status(201).json(appointment);
-                }
-            })
+            return repository.add(appointmentWithDate).then
+                (results => {
+                    const id = results.insertId;
+                    return { ...appointment, id };
+                })
         }
     }
 
