@@ -14,6 +14,8 @@ Criação de API REST utilizando NodeJS com Express e MySQL
 
 > npm install moment (instala a biblioteca moment para trabalhar com datas)
 
+> npm install (executar dentro do caminho da API dentro dessa API chamada Services) e logo após **node clients.js** para executar essa API
+
 ### Dicas
 - Em package.json utilize o **start** dentro de **scripts** para informar qual o comando inicial será executado ao digitar **npm start**. Isso evita ter que digitar o caminho inteiro do projeto até o **index.js** toda vez que precisar de recompilação. Feito isso, podemos então instalar o pacote **nodemon** para automatizar o processo de compilação e toda vez que houver mudanças no projeto a recompilação será feita automaticamente pelo **nodemon**. Exemplo:
 
