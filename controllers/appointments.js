@@ -3,7 +3,9 @@ const appointment = require('../models/appointments');
 module.exports = app => {
     // O req é o que a API recebe e res é o que ela devolverá
     app.get('/appointments', (req, res) => {
-        appointment.getAll(res);
+        appointment.getAll()
+            .then(results => res.status(200).json(results))
+            .catch(err => res.status(400).json(err));
     });
 
     app.get('/appointments/:id', (req, res) => {
