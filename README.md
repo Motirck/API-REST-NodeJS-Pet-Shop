@@ -37,7 +37,7 @@ Executar comandos abaixo na API dentro da API de Pet-Shop no caminho (**API-REST
 1) Instale o Nodemon conforme as orientações acima
 2) Adicione a configuração de launch.json clicando no ícone de Debug do VSCode e logo após no ícone de engrenagem
 3) Clique no botão **Add Configuration** e escolha **{} Node.js: Attach**
-4) Altere o **package.json** e adcione o **--inspect** ao comando de start dos cripts. Exemplo:
+4) Altere o **package.json** e adcione o **--inspect** ao comando de start dos scripts. Exemplo:
 
 ```json
 "scripts": {
